@@ -49,6 +49,7 @@ class _PictureJumpPageState extends State<PictureJumpPage> {
           backgroundColor: CustomColor.topNavigationColor,
           elevation: 0.0),
           */
+      backgroundColor: Colors.red,
       body: Container(
         child: ListView.builder(
           physics: BouncingScrollPhysics(),
@@ -63,41 +64,35 @@ class _PictureJumpPageState extends State<PictureJumpPage> {
 
   // 文件
   Widget _buildFileItem(FileSystemEntity file) {
-    //  File imgFile = File(file.path);
+     File imgFile = File(file.path);
 
-    return InkWell(
-      //  onTap: () {OpenFile.open(file.path);},
-      child: Container(
-        child: AsperctRaioImage.file(
-          file,
-          filebBuilder: (context, snapshot, file) {
-            // print('width=${snapshot.data.width}');
-            // print('heiht=${snapshot.data.height}');
+Image img = Image.file(file);
+int heightValue = 0;
+int widthValue = 0;
+ img.image.resolve(new ImageConfiguration()).addListener (
+      new ImageStreamListener((ImageInfo info, bool _) {
 
-            return Column(
+     widthValue= info.image.width;
+    heightValue = info.image.height;
+  }));
+            return  Column(
               children: <Widget>[
-                //   Text('大小--${snapshot.data.width.toDouble()}x${snapshot.data.height.toDouble()}',style: TextStyle(fontSize: 17.0),),
-                Image.file(file),
                 Container(
-                  width: snapshot.data.width.toDouble() / //100,
-                      (snapshot.data.width / 360),
-                  height: snapshot.data.height.toDouble() / 600,
-                  // (snapshot.data.width.toDouble() / 360),
+                  width: widthValue.toDouble(),
+                  height: heightValue.toDouble(),
+                  // width: widthValue.toDouble() / //100,
+                      // (widthValue / 360),
+                  // height: heightValue.toDouble() / 600,
+                  // (widthValue.toDouble / 360),
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage(
-                        file.toString(),
-                      ),
+                      image: FileImage(imgFile),
                       fit: BoxFit.cover,
                     ),
                   ),
                 )
               ],
             );
-          },
-        ),
-      ),
-    );
   }
 
   /*  // 文件
@@ -147,7 +142,9 @@ class _PictureJumpPageState extends State<PictureJumpPage> {
   void getCurrentPathFiles(String path) {
     try {
       //  currentDir = Get.currentRoute as Directory;
+      
       currentDir = Get.arguments; // 跳转路径
+
 
       List<FileSystemEntity> _files = [];
       for (var v in currentDir.listSync()) {
