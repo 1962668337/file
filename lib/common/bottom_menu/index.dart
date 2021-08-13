@@ -1,5 +1,4 @@
-import 'package:flutter_file_manager/modify/modify_1/cc.dart';
-import 'package:flutter_file_manager/modify/modify_1/list_page.dart';
+import 'package:flutter_file_manager/modify/modify_1/list_page_one.dart';
 import 'package:flutter_file_manager/modify/photo_widght/photo_page_4.dart';
 import 'package:flutter_file_manager/modify/photo_widght/photo_page_5.dart';
 import 'package:flutter_file_manager/common/picture_aspect/picture_jump_page.dart';
@@ -20,8 +19,7 @@ class BottomMenuPage extends StatelessWidget {
     PhotoPage5(),
     PictureJumpPage(),
     PhotoPage4(),
-    ListPage(),
-    Cc()
+    ListPageOne(),
   ];
 
   bool navBarMode = false;
@@ -49,7 +47,6 @@ class BottomMenuPage extends StatelessWidget {
             TitledNavigationBarItem(title: Text('5中长按'), icon: Icons.home),
             TitledNavigationBarItem(title: Text('4'), icon: Icons.home),
             TitledNavigationBarItem(title: Text('ListPage'), icon: Icons.home),
-            TitledNavigationBarItem(title: Text('cc'), icon: Icons.home),
           ],
         ),
       ),
